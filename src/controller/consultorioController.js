@@ -63,7 +63,7 @@ const deleteConsultorios = async (req, res) => {
     try {
         const {id} = req.params
         const deletedConsultorios = await ConsultoriosModel.findByIdAndDelete(id)
-        const message = ` o console ${deletedConsultorios.consultorio} foi deletado com sucesso.`
+        const message = `O consultorio ${deletedConsultorios.consultorio} foi deletado com sucesso.`
         res.status(201).json({message})
     } catch (error) {
         console.error(error)
