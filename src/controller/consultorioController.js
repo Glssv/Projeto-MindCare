@@ -35,8 +35,8 @@ const findConsultoriosById = async (req, res) => {
 
 const findByCidade = async (req, res) => {
     try {
-        const cidadeReq = req.query.cidade.toLocaleLowerCase()
-        const cidadeEncontrada = await ConsultoriosModel.filter((consultorios) => consultorios.cidade.toLocaleLowerCase().includes(cidadeReq))
+        const cidadeReq = req.query.cidade
+        const cidadeEncontrada = await ConsultoriosModel.find({cidade: cidadeReq}, null)
         res.status(200).json({cidadeEncontrada})
     } catch (error) {
         console.error(error)
@@ -63,7 +63,7 @@ const deleteConsultorios = async (req, res) => {
     try {
         const {id} = req.params
         const deletedConsultorios = await ConsultoriosModel.findByIdAndDelete(id)
-        const message = `O consultorio ${deletedConsultorios.consultorio} foi deletado com sucesso.`
+        const message = `O consultorio "${deletedConsultorios.consultorio}" foi deletado com sucesso.`
         res.status(201).json({message})
     } catch (error) {
         console.error(error)
